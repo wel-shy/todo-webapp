@@ -1,16 +1,20 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  div#app
+    TitleBar
+    NewTodo
+    AllTodos
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
+import NewTodo from './components/NewTodo.vue';
+import AllTodos from './components/AllTodos.vue';
 
 export default {
   name: 'app',
   components: {
+    AllTodos,
+    NewTodo,
     HelloWorld,
   },
 };
