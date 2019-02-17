@@ -18,11 +18,18 @@
                 )
                   span.icon.is-small
                     i.fas.fa-plus
+          div.hero-footer
+            Login(
+              v-if="!token"
+            )
 </template>
 
 <script>
+import Login from './Login.vue';
+
 export default {
   name: 'NewTodo',
+  components: { Login },
   data() {
     return {
       task: '',
@@ -37,6 +44,11 @@ export default {
       };
 
       this.$store.commit('addTodo', todo);
+    },
+  },
+  computed: {
+    token() {
+      return this.$store.getters.getToken.length > 0;
     },
   },
 };
