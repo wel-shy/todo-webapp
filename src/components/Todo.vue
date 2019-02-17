@@ -28,17 +28,25 @@
 </template>
 
 <script>
+import API from '../API';
+
 export default {
   props: ['todo'],
   name: 'Todo',
   methods: {
-    deleteTodo() {
+    async deleteTodo() {
+      if (this.$store.getters.getToken.length > 0) {
+        await API.deleteTodo(this.todo._id, this.$store.getters.getToken);
+      }
       this.$store.commit('deleteTodo', this.todo._id);
     },
-    toggleDone() {
+    async toggleDone() {
       const newTodo = this.todo;
       newTodo.done = !this.todo.done;
-      console.log('setting done');
+
+      if (this.$store.getters.getToken.length > 0) {
+        await API.updateTodo(newTodo, this.$store.getters.getToken);
+      }
 
       this.$store.commit('updateTodo', newTodo);
     },

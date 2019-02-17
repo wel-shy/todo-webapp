@@ -26,6 +26,7 @@
 
 <script>
 import Login from './Login.vue';
+import API from '../API';
 
 export default {
   name: 'NewTodo',
@@ -36,14 +37,24 @@ export default {
     };
   },
   methods: {
-    addTodo() {
-      const todo = {
+    async addTodo() {
+      const todoData = {
         task: this.task,
-        done: true,
-        _id: Math.floor((Math.random() * 100) + 1),
+        done: false,
       };
 
-      this.$store.commit('addTodo', todo);
+      if (this.$store.getters.getToken.length > 0) {
+        let todo;
+        try {
+          todo = await API.storeTodo(todoData, this.$store.getters.getToken);
+          this.$store.commit('addTodo', todo);
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        todoData._id = Math.floor((Math.random() * 10000) + 1);
+        this.$store.commit('addTodo', todoData);
+      }
     },
   },
   computed: {

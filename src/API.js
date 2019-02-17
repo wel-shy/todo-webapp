@@ -34,4 +34,19 @@ export default class API {
     const response = await axios.get(`${URL}/todo/`, { headers: { 'x-access-token': token } });
     return response.data.payload;
   }
+
+  static async storeTodo(todoData, token) {
+    const response = await axios.post(`${URL}/todo/`, todoData, { headers: { 'x-access-token': token } });
+    return response.data.payload;
+  }
+
+  static async deleteTodo(id, token) {
+    const response = await axios.delete(`${URL}/todo/${id}`, { headers: { 'x-access-token': token } });
+    return response.data.status;
+  }
+
+  static async updateTodo(todo, token) {
+    const response = await axios.post(`${URL}/todo/update`, todo, { headers: { 'x-access-token': token } });
+    return response.data.payload;
+  }
 }
