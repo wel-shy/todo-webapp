@@ -37,8 +37,6 @@ describe('Todo', () => {
 
       const todosLength = wrapper.vm.$store.getters.getTodos.length;
 
-      // wrapper.vm.$store = store;
-
       wrapper.vm.addTodo()
         .then(() => {
           expect(wrapper.vm.$store.getters.getTodos.length).to.equal(todosLength + 1);
