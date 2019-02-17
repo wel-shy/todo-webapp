@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+stages:
+  - test
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run test:unit
