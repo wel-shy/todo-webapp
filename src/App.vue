@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 import NewTodo from './components/NewTodo.vue';
 import AllTodos from './components/AllTodos.vue';
 import Cookie from './cookie';
@@ -27,7 +26,6 @@ export default {
     Login,
     AllTodos,
     NewTodo,
-    HelloWorld,
   },
   computed: {
     token() {
