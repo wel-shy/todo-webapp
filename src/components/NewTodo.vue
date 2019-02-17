@@ -1,6 +1,6 @@
 <template lang="pug">
     div#new-todo.has-text-centered
-      section.hero.is-small.is-medium
+      section.hero.is-small.is-small
         div.hero-body
           div.container
             h1.is-size-1 📋 Todos
@@ -14,14 +14,11 @@
                 )
               div.control
                 a.button.is-primary(
+                  :disabled="task.length < 1"
                   @click="addTodo"
                 )
                   span.icon.is-small
                     i.fas.fa-plus
-          div.hero-footer
-            Login(
-              v-if="!token"
-            )
 </template>
 
 <script>
@@ -38,6 +35,8 @@ export default {
   },
   methods: {
     async addTodo() {
+      if (this.task.length < 1) return;
+
       const todoData = {
         task: this.task,
         done: false,
@@ -55,11 +54,8 @@ export default {
         todoData._id = Math.floor((Math.random() * 10000) + 1);
         this.$store.commit('addTodo', todoData);
       }
-    },
-  },
-  computed: {
-    token() {
-      return this.$store.getters.getToken.length > 0;
+
+      this.task = '';
     },
   },
 };

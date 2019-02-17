@@ -24,10 +24,12 @@
                 i.fas.fa-lock
     div.container
       button.button.is-info(
+        :disabled="username.length < 1 || password.length < 1",
         @click="login"
       )
         p Login
-      button.button.is-info(
+      button.button.is-info.is-outlined(
+        :disabled="username.length < 1 || password.length < 1",
         @click="register"
       )
         p Register
@@ -76,10 +78,32 @@ export default {
       }
     },
     async register() {
-      const token = await API.register(this.username, this.password);
-      console.log(token);
-    },
+      // Throw an error is username or password is not provided
+      if (this.username.length === 0 || this.password.length === 0) throw new Error('Username or password cannot be empty.');
 
+      // Try to get the token
+      let token;
+      try {
+        token = await API.register(this.username, this.password);
+      } catch (e) {
+        this.isNotificationHidden = false;
+        switch (e.response.data.code) {
+          case 403:
+            this.notificationText = 'Username is already taken';
+            break;
+          default:
+            this.notificationText = 'Something went wrong';
+            break;
+        }
+      }
+
+      // Store the cookie
+      if (token) {
+        Cookie.set(token);
+        this.$store.commit('updateToken', token);
+        this.$emit('authenticated');
+      }
+    },
   },
 };
 </script>
