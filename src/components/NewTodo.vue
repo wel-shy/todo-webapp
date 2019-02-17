@@ -13,7 +13,7 @@
                   v-on:keyup.enter="addTodo"
                 )
               div.control
-                a.button.is-primary(
+                a.button.is-primary.is-outlined(
                   :disabled="task.length < 1"
                   @click="addTodo"
                 )

@@ -4,23 +4,23 @@
     )
       div.box
         div.columns.is-mobile
-          div.column.has-text-left.is-one-fifth
-            a.button.done-button(
+          div.column.has-text-left.is-narrow
+            a.button.done-button.is-outlined(
               @click="toggleDone",
               :class="{'is-primary': todo.done}"
             )
               span.icon.is-small
                 i.far.fa-check-circle
-          div.column.has-text-left.is-three-fifths
+          div.column.has-text-left.column
             p.task {{ todo.task }}
-          div.column.has-text-right.is-one-fifth
+          div.column.has-text-right.column
             div.field.has-addons.control-buttons
               p.control
-                a.button.is-warning
+                a.button.is-warning.is-outlined
                   span.icon.is-small
                     i.fas.fa-archive
               p.control
-                a.button.is-danger(
+                a.button.is-danger.is-outlined(
                   @click="deleteTodo"
                 )
                   span.icon.is-small

@@ -5,7 +5,7 @@
       v-if="token.length === 0 ",
       v-on:authenticated="getData",
     )
-    AllTodos
+    AllTodos#all
 </template>
 
 <script>
@@ -60,5 +60,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+  #all {
+    margin-top: 2.5%;
+  }
 }
 </style>
