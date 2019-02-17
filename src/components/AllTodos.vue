@@ -1,11 +1,13 @@
 <template lang="pug">
-  div#all-todos
+  div#all-todos.container
     div.todos
       Todo(
         v-for="todo in todos",
         :todo="todo"
       )
-    div.page-selection.has.text.has-text-centered
+    div.page-selection.has.text.has-text-centered(
+      v-if="count > limit "
+    )
       div.columns.is-mobile
         div.column.has-text-right
           p(
@@ -50,6 +52,9 @@ export default {
     },
     limit() {
       return this.$store.getters.getLimit;
+    },
+    count() {
+      return this.$store.getters.getCount;
     },
   },
   methods: {

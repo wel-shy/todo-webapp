@@ -11,6 +11,7 @@ const state = {
   pageSize: 10,
   page: 1,
   limit: 5,
+  count: 0,
 };
 
 const mutations = {
@@ -23,6 +24,18 @@ const mutations = {
     if (idx >= 0) {
       state.todos[idx] = payload;
     }
+  },
+
+  updateCount: (state, payload) => {
+    state.count = payload;
+  },
+
+  incrementCount: (state) => {
+    state.count += 1;
+  },
+
+  decrementCount: (state) => {
+    state.count -= 1;
   },
 
   incrementPage: (state) => {
@@ -47,7 +60,7 @@ const mutations = {
 const actions = {};
 
 const getters = {
-  getTodos: state => state.todos,
+  getTodos: state => state.todos.filter(todo => !todo.archived),
 
   getPage: state => state.page,
 
@@ -58,6 +71,10 @@ const getters = {
     if (idx < 0) return null;
     return state.todos[idx];
   },
+
+  getArchived: state => state.todos.filter(todo => todo.archived === true),
+
+  getCount: state => state.count,
 };
 
 export default {

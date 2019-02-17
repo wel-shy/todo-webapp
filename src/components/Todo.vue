@@ -16,7 +16,9 @@
           div.column.has-text-right.column
             div.field.has-addons.control-buttons
               p.control
-                a.button.is-warning.is-outlined
+                a.button.is-warning.is-outlined(
+                  @click="archive"
+                )
                   span.icon.is-small
                     i.fas.fa-archive
               p.control
@@ -39,10 +41,21 @@ export default {
         await API.deleteTodo(this.todo._id, this.$store.getters.getToken);
       }
       this.$store.commit('deleteTodo', this.todo._id);
+      this.$store.commit('decrementCount');
     },
     async toggleDone() {
       const newTodo = this.todo;
       newTodo.done = !this.todo.done;
+
+      if (this.$store.getters.getToken.length > 0) {
+        await API.updateTodo(newTodo, this.$store.getters.getToken);
+      }
+
+      this.$store.commit('updateTodo', newTodo);
+    },
+    async archive() {
+      const newTodo = this.todo;
+      newTodo.archived = true;
 
       if (this.$store.getters.getToken.length > 0) {
         await API.updateTodo(newTodo, this.$store.getters.getToken);

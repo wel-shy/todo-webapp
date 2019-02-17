@@ -40,6 +40,7 @@ export default {
       const todoData = {
         task: this.task,
         done: false,
+        archived: false,
       };
 
       if (this.$store.getters.getToken.length > 0) {
@@ -47,12 +48,14 @@ export default {
         try {
           todo = await API.storeTodo(todoData, this.$store.getters.getToken);
           this.$store.commit('addTodo', todo);
+          this.$store.commit('incrementCount');
         } catch (e) {
           console.error(e);
         }
       } else {
         todoData._id = Math.floor((Math.random() * 10000) + 1);
         this.$store.commit('addTodo', todoData);
+        this.$store.commit('incrementCount');
       }
 
       this.task = '';
