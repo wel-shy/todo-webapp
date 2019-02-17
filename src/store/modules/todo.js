@@ -8,6 +8,9 @@
 
 const state = {
   todos: [],
+  pageSize: 10,
+  page: 1,
+  limit: 5,
 };
 
 const mutations = {
@@ -22,8 +25,17 @@ const mutations = {
     }
   },
 
+  incrementPage: (state) => {
+    state.page += 1;
+  },
+
+  decrementPage: (state) => {
+    state.page -= 1;
+  },
+
   addTodo: (state, payload) => {
-    state.todos.push(payload);
+    // state.todos.push(payload);
+    state.todos.unshift(payload);
   },
 
   deleteTodo: (state, id) => {
@@ -36,6 +48,10 @@ const actions = {};
 
 const getters = {
   getTodos: state => state.todos,
+
+  getPage: state => state.page,
+
+  getLimit: state => state.limit,
 
   getTodoById: state => (id) => {
     const idx = state.todos.findIndex(todo => todo._id === id);
