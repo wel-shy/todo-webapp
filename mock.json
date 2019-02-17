@@ -1,0 +1,261 @@
+{
+  "authenticate": {
+    "data": {
+      "code": 200,
+      "message": "success",
+      "errors": false,
+      "payload": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNjgzNDNiMTExMjAyMDAxMTAxZmY0YSIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTUwNDAwODA1LCJleHAiOjE1NTA0ODcyMDV9.jtyJDwWqu4kXlVnA0VyXIlydOp68-21gs2q7GV_KrmY"
+      }
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+      "transformRequest": {},
+      "transformResponse": {},
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      "method": "post",
+      "url": "http://localhost:3333/api/auth/authenticate",
+      "data": "{\"username\":\"daniel\",\"password\":\"secret\"}"
+    },
+    "request": {
+      "upload": {
+        "_ownerDocument": {
+          "location": {
+            "href": "http://localhost/",
+            "origin": "http://localhost",
+            "protocol": "http:",
+            "host": "localhost",
+            "hostname": "localhost",
+            "port": "",
+            "pathname": "/",
+            "search": "",
+            "hash": ""
+          }
+        }
+      },
+      "_registeredHandlers": {},
+      "_eventHandlers": {}
+    }
+  },
+  "register": {
+    "data": {
+      "code": 200,
+      "message": "success",
+      "errors": false,
+      "payload": {
+        "user": {
+          "role": "USER",
+          "_id": "5c693f15f0c087001319203b",
+          "iv": "3de04000783801a9d8f497b28402bbc9",
+          "username": "mxl3qi",
+          "password": "",
+          "createdAt": "2019-02-17T11:01:41.766Z",
+          "updatedAt": "2019-02-17T11:01:41.766Z",
+          "__v": 0
+        },
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNjkzZjE1ZjBjMDg3MDAxMzE5MjAzYiIsInVzZXJuYW1lIjoibXhsM3FpIiwiaWF0IjoxNTUwNDAxMzAxLCJleHAiOjE1NTA0ODc3MDF9.ySgiE7Oajy8_PEut0-uMDSoOhbNiPwgv5F2bajnXesg"
+      }
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+      "transformRequest": {},
+      "transformResponse": {},
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      "method": "post",
+      "url": "http://localhost:3333/api/auth/register",
+      "data": "{\"username\":\"mxl3qi\",\"password\":\"secret\"}"
+    },
+    "request": {
+      "upload": {
+        "_ownerDocument": {
+          "location": {
+            "href": "http://localhost/",
+            "origin": "http://localhost",
+            "protocol": "http:",
+            "host": "localhost",
+            "hostname": "localhost",
+            "port": "",
+            "pathname": "/",
+            "search": "",
+            "hash": ""
+          }
+        }
+      },
+      "_registeredHandlers": {},
+      "_eventHandlers": {}
+    }
+  },
+  "storeTodo": {
+    "data": {
+      "code": 200,
+      "message": "success",
+      "errors": false,
+      "payload": {
+        "_id": "5c694230f0c087001319203d",
+        "task": "new",
+        "done": false,
+        "userId": "5c68343b111202001101ff4a",
+        "createdAt": "2019-02-17T11:14:56.076Z",
+        "updatedAt": "2019-02-17T11:14:56.076Z",
+        "__v": 0
+      }
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+      "transformRequest": {},
+      "transformResponse": {},
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNjgzNDNiMTExMjAyMDAxMTAxZmY0YSIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTUwNDAyMDkxLCJleHAiOjE1NTA0ODg0OTF9.Cii7kzVh-m88C8V2p8pdjY8Gq7ySA1YeORh8qTC1riM"
+      },
+      "method": "post",
+      "url": "http://localhost:3333/api/todo/",
+      "data": "{\"task\":\"new\",\"done\":false}"
+    },
+    "request": {}
+  },
+  "allTodos": {
+    "data": {
+      "code": 200,
+      "message": "success",
+      "errors": false,
+      "payload": [
+        {
+          "_id": "5c694230f0c087001319203d",
+          "task": "new",
+          "done": false,
+          "userId": "5c68343b111202001101ff4a",
+          "createdAt": "2019-02-17T11:14:56.076Z",
+          "updatedAt": "2019-02-17T11:14:56.076Z",
+          "__v": 0
+        },
+        {
+          "_id": "5c6942abf0c087001319203e",
+          "task": "hello",
+          "done": false,
+          "userId": "5c68343b111202001101ff4a",
+          "createdAt": "2019-02-17T11:16:59.606Z",
+          "updatedAt": "2019-02-17T11:16:59.606Z",
+          "__v": 0
+        }
+      ]
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+      "transformRequest": {},
+      "transformResponse": {},
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNjgzNDNiMTExMjAyMDAxMTAxZmY0YSIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTUwNDAyMDkxLCJleHAiOjE1NTA0ODg0OTF9.Cii7kzVh-m88C8V2p8pdjY8Gq7ySA1YeORh8qTC1riM"
+      },
+      "method": "get",
+      "url": "http://localhost:3333/api/todo/"
+    },
+    "request": {}
+  },
+  "deleteTodo": {
+    "data": {
+      "code": 200,
+      "message": "success",
+      "errors": false,
+      "payload": {}
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+      "transformRequest": {},
+      "transformResponse": {},
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNjgzNDNiMTExMjAyMDAxMTAxZmY0YSIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTUwNDAyMDkxLCJleHAiOjE1NTA0ODg0OTF9.Cii7kzVh-m88C8V2p8pdjY8Gq7ySA1YeORh8qTC1riM"
+      },
+      "method": "delete",
+      "url": "http://localhost:3333/api/todo/5c694230f0c087001319203d"
+    },
+    "request": {}
+  },
+  "updateTodo": {
+    "data": {
+      "code": 200,
+      "message": "success",
+      "errors": false,
+      "payload": {
+        "_id": "5c6942abf0c087001319203e",
+        "task": "hello",
+        "done": true,
+        "userId": "5c68343b111202001101ff4a",
+        "createdAt": "2019-02-17T11:16:59.606Z",
+        "updatedAt": "2019-02-17T11:16:59.606Z",
+        "__v": 0
+      }
+    },
+    "status": 200,
+    "statusText": "OK",
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "config": {
+      "transformRequest": {},
+      "transformResponse": {},
+      "timeout": 0,
+      "xsrfCookieName": "XSRF-TOKEN",
+      "xsrfHeaderName": "X-XSRF-TOKEN",
+      "maxContentLength": -1,
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjNjgzNDNiMTExMjAyMDAxMTAxZmY0YSIsInVzZXJuYW1lIjoiZGFuaWVsIiwiaWF0IjoxNTUwNDAyMDkxLCJleHAiOjE1NTA0ODg0OTF9.Cii7kzVh-m88C8V2p8pdjY8Gq7ySA1YeORh8qTC1riM"
+      },
+      "method": "post",
+      "url": "http://localhost:3333/api/todo/update",
+      "data": "{\"_id\":\"5c6942abf0c087001319203e\",\"task\":\"hello\",\"done\":true,\"userId\":\"5c68343b111202001101ff4a\",\"createdAt\":\"2019-02-17T11:16:59.606Z\",\"updatedAt\":\"2019-02-17T11:16:59.606Z\",\"__v\":0}"
+    },
+    "request": {}
+  }
+}

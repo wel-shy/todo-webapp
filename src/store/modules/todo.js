@@ -37,7 +37,11 @@ const actions = {};
 const getters = {
   getTodos: state => state.todos,
 
-  geTodosById: state => id => state.todos.find(device => device._id === id),
+  getTodoById: state => (id) => {
+    const idx = state.todos.findIndex(todo => todo._id === id);
+    if (idx < 0) return null;
+    return state.todos[idx];
+  },
 };
 
 export default {

@@ -5,8 +5,13 @@
  -
  */
 import axios from 'axios';
+import mock from '../mock.json';
 
 const URL = 'http://localhost:3333/api';
+
+function isTest() {
+  return process.env.NODE_ENV === 'test';
+}
 
 export default class API {
   static async login(username, password) {
@@ -14,8 +19,13 @@ export default class API {
       username,
       password,
     };
+    let response;
 
-    const response = await axios.post(`${URL}/auth/authenticate`, loginData);
+    if (isTest()) {
+      response = mock.authenticate;
+    } else {
+      response = await axios.post(`${URL}/auth/authenticate`, loginData);
+    }
 
     return response.data.payload.token;
   }
@@ -25,28 +35,61 @@ export default class API {
       username,
       password,
     };
-    const response = await axios.post(`${URL}/auth/register`, registerData);
+    let response;
+
+    if (isTest()) {
+      response = mock.register;
+    } else {
+      response = await axios.post(`${URL}/auth/register`, registerData);
+    }
 
     return response.data.payload.token;
   }
 
   static async getAllTodos(token) {
-    const response = await axios.get(`${URL}/todo/`, { headers: { 'x-access-token': token } });
+    let response;
+
+    if (isTest()) {
+      response = mock.allTodos;
+    } else {
+      response = await axios.get(`${URL}/todo/`, { headers: { 'x-access-token': token } });
+    }
+
     return response.data.payload;
   }
 
   static async storeTodo(todoData, token) {
-    const response = await axios.post(`${URL}/todo/`, todoData, { headers: { 'x-access-token': token } });
+    let response;
+
+    if (isTest()) {
+      response = mock.storeTodo;
+    } else {
+      response = await axios.post(`${URL}/todo/`, todoData, { headers: { 'x-access-token': token } });
+    }
+
     return response.data.payload;
   }
 
   static async deleteTodo(id, token) {
-    const response = await axios.delete(`${URL}/todo/${id}`, { headers: { 'x-access-token': token } });
+    let response;
+
+    if (isTest()) {
+      response = mock.deleteTodo;
+    } else {
+      response = await axios.delete(`${URL}/todo/${id}`, { headers: { 'x-access-token': token } });
+    }
+
     return response.data.status;
   }
 
   static async updateTodo(todo, token) {
-    const response = await axios.post(`${URL}/todo/update`, todo, { headers: { 'x-access-token': token } });
+    let response;
+
+    if (isTest()) {
+      response = mock.updateTodo;
+    } else {
+      response = await axios.post(`${URL}/todo/update`, todo, { headers: { 'x-access-token': token } });
+    }
     return response.data.payload;
   }
 }

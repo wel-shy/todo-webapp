@@ -23,12 +23,12 @@
               span.icon.is-small.is-left
                 i.fas.fa-lock
     div.container
-      button.button.is-info(
+      button#login-submit.button.is-info(
         :disabled="username.length < 1 || password.length < 1",
         @click="login"
       )
         p Login
-      button.button.is-info.is-outlined(
+      button#register-submit.button.is-info.is-outlined(
         :disabled="username.length < 1 || password.length < 1",
         @click="register"
       )

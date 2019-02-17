@@ -13,7 +13,7 @@
                   v-on:keyup.enter="addTodo"
                 )
               div.control
-                a.button.is-primary.is-outlined(
+                a#submit-todo.button.is-primary.is-outlined(
                   :disabled="task.length < 1"
                   @click="addTodo"
                 )
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     async addTodo() {
-      if (this.task.length < 1) return;
+      if (this.task === '') throw new Error('task cannot be empty');
 
       const todoData = {
         task: this.task,

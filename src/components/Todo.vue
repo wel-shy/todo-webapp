@@ -5,14 +5,14 @@
       div.box
         div.columns.is-mobile
           div.column.has-text-left.is-narrow
-            a.button.done-button.is-outlined(
+            a#done-button.button.done-button.is-outlined(
               @click="toggleDone",
               :class="{'is-primary': todo.done}"
             )
               span.icon.is-small
                 i.far.fa-check-circle
           div.column.has-text-left.column
-            p.task {{ todo.task }}
+            p#task-text.task {{ todo.task }}
           div.column.has-text-right.column
             div.field.has-addons.control-buttons
               p.control
@@ -20,7 +20,7 @@
                   span.icon.is-small
                     i.fas.fa-archive
               p.control
-                a.button.is-danger.is-outlined(
+                a#delete-button.button.is-danger.is-outlined(
                   @click="deleteTodo"
                 )
                   span.icon.is-small
