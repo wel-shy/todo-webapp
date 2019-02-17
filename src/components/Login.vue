@@ -22,25 +22,31 @@
               )
               span.icon.is-small.is-left
                 i.fas.fa-lock
-    div.container
-      button#login-submit.button.is-info(
-        :disabled="username.length < 1 || password.length < 1",
-        @click="login"
-      )
-        p Login
-      button#register-submit.button.is-info.is-outlined(
-        :disabled="username.length < 1 || password.length < 1",
-        @click="register"
-      )
-        p Register
+      Notification#notification(
+        v-show="!isNotificationHidden",
+        v-on:closed="isNotificationHidden = true"
+      ) {{ notificationText }}
+      div.container
+        button#login-submit.button.is-info(
+          :disabled="username.length < 1 || password.length < 1",
+          @click="login"
+        )
+          p Login
+        button#register-submit.button.is-info.is-outlined(
+          :disabled="username.length < 1 || password.length < 1",
+          @click="register"
+        )
+          p Register
 </template>
 
 <script>
 import API from '../API';
 import Cookie from '../cookie';
+import Notification from './Notification.vue';
 
 export default {
   name: 'Login',
+  components: { Notification },
   data() {
     return {
       username: '',
@@ -117,11 +123,11 @@ export default {
     margin-bottom: 1.25%;
   }
 .button {
-  margin-top: 5px;
+  margin-top: 15px;
   margin-left: 2px;
   margin-right: 2px;
 }
-  .login-form {
+  .login-form, #notification {
     width: 52.5%;
     margin-left: auto;
     margin-right: auto;

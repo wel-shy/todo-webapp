@@ -1,10 +1,10 @@
 <template lang="pug">
   div#notification
-  div.notification.is-danger
-  button.delete(
-  @click="emitClose"
-  )
-  slot
+    div.notification.box.is-danger.is-outlined
+      button.delete(
+      @click="emitClose"
+      )
+      slot
 </template>
 
 <script>
