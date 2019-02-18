@@ -1,5 +1,5 @@
 <template lang="pug">
-  div#login
+  div#login.has-text-centered
     div.container
       p Login to save your list!
       div.field.is-horizontal.login-form
