@@ -1,10 +1,18 @@
 <template lang="pug">
   div#app
     div.content
-      NewTodo#new-todo
+      NewTodo#new-todo(
+        v-on:search-todos="searchTodos"
+      )
       Login(
         v-if="token.length === 0 ",
         v-on:authenticated="getData",
+      )
+      Search#search(
+        v-if="searchResults.length > 0"
+        :todos="searchResults",
+        :query="query",
+        v-on:clear-search="searchResults = []"
       )
       AllTodos#all
       Archived#archive(
@@ -21,15 +29,23 @@ import API from './API';
 import Login from './components/Login.vue';
 import Archived from './components/Archived.vue';
 import FooterBar from './components/FooterBar.vue';
+import Search from './components/Search.vue';
 
 export default {
   name: 'app',
   components: {
+    Search,
     FooterBar,
     Archived,
     Login,
     AllTodos,
     NewTodo,
+  },
+  data() {
+    return {
+      searchResults: [],
+      query: '',
+    };
   },
   computed: {
     token() {
@@ -64,6 +80,16 @@ export default {
         // TODO: Update UI
       }
     },
+    searchTodos(query) {
+      if (!this.$store.getters.getToken) {
+        this.searchResults = this.$store.getters.getTodos
+          .filter(todo => todo.task.indexOf(query) > -1);
+      }
+
+      this.query = query;
+
+      return null;
+    },
   },
   async mounted() {
     // Get the token from cookie if exists and write to store.
@@ -83,20 +109,18 @@ export default {
     margin-bottom: 350px;
   }
   min-height: 100%;
+
   #all {
     margin-top: 2.5%;
-    /*min-height: 50vh;*/
-  }
-
-  #new-todo {
-    /*min-height: 25vh;*/
-    /*max-height: 25vh;*/
   }
 
   #archive {
     margin-top: 2.5%;
     margin-bottom: 5%;
-    /*min-height: 25vh;*/
+  }
+
+  #search {
+    margin-top: 2.5%;
   }
 }
 </style>

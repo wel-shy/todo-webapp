@@ -1,5 +1,6 @@
 <template lang="pug">
   div#all-todos.container
+    h3.is-size-3.has.has-text-centered 📋 Todos
     div.todos
       Todo(
         v-for="todo in todos",

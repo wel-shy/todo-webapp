@@ -3,7 +3,7 @@
       section.hero.is-small.is-small
         div.hero-body
           div.container
-            h1.is-size-1 📋 Todos
+            h1.is-size-1 Todos
             div.field.has-addons.has-addons-centered
               div.control.text-input
                 input.input(
@@ -19,15 +19,19 @@
                 )
                   span.icon.is-small
                     i.fas.fa-plus
+            SearchBar(
+              v-on:search-todos="handleSearch"
+            )
 </template>
 
 <script>
 import Login from './Login.vue';
 import API from '../API';
+import SearchBar from './SearchBar.vue';
 
 export default {
   name: 'NewTodo',
-  components: { Login },
+  components: { SearchBar, Login },
   data() {
     return {
       task: '',
@@ -59,6 +63,10 @@ export default {
       }
 
       this.task = '';
+    },
+    handleSearch(e) {
+      console.log(e);
+      this.$emit('search-todos', e);
     },
   },
 };
