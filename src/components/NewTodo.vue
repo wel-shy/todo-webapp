@@ -2,6 +2,12 @@
     div#new-todo.has-text-centered
       section.hero.is-small.is-small
         div.hero-body
+          div.hero-head.has-text-right(
+            v-if="token"
+          )
+            button.button(
+              @click="logout"
+            ) Logout
           div.container
             h1.is-size-1 Todos
             div.field.has-addons.has-addons-centered
@@ -28,6 +34,7 @@
 import Login from './Login.vue';
 import API from '../API';
 import SearchBar from './SearchBar.vue';
+import Cookie from '../cookie';
 
 export default {
   name: 'NewTodo',
@@ -36,6 +43,11 @@ export default {
     return {
       task: '',
     };
+  },
+  computed: {
+    token() {
+      return this.$store.getters.getToken;
+    },
   },
   methods: {
     async addTodo() {
@@ -67,6 +79,11 @@ export default {
     handleSearch(e) {
       console.log(e);
       this.$emit('search-todos', e);
+    },
+    logout() {
+      Cookie.delete();
+      this.$store.commit('deleteToken');
+      this.$store.commit('resetTodos');
     },
   },
 };

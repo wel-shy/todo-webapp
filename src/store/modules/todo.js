@@ -97,9 +97,26 @@ const mutations = {
     state.todos.splice(idx, 1);
   },
 
+  deleteTodos: (state) => {
+    state.todos = [];
+  },
+
+  deleteArchive: (state) => {
+    state.archive = [];
+  },
+
   deleteArchived: (state, id) => {
     const idx = state.archived.findIndex(todo => todo._id === id);
     state.archived.splice(idx, 1);
+  },
+
+  resetTodos: (state) => {
+    state.todos = [];
+    state.archived = [];
+    state.page = 1;
+    state.archivePage = 1;
+    state.count = 0;
+    state.archiveCount = 0;
   },
 };
 

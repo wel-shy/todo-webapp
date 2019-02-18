@@ -14,7 +14,9 @@
         :query="query",
         v-on:clear-search="searchResults = []"
       )
-      AllTodos#all
+      AllTodos#all(
+        v-if="hasTodos"
+      )
       Archived#archive(
         v-if="archived > 0",
       )
@@ -53,6 +55,9 @@ export default {
     },
     archived() {
       return this.$store.getters.getArchiveCount;
+    },
+    hasTodos() {
+      return this.$store.getters.getCount > 0;
     },
   },
   methods: {
