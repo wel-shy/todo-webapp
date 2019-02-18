@@ -1,8 +1,8 @@
 <template lang="pug">
   footer#footer-bar.footer.has-text-centered.is-small
     div.container
-      p.is-size-5 Todos
-      p Todos, created by&nbsp;
+      p.is-size-5.header Todos
+      p.content Todos, created by&nbsp;
         |
         a(
         href="https://dwelsh.uk"
@@ -20,12 +20,6 @@
         href="https://github.com/wel-shy/todo"
         ) API
         | &nbsp;on Github.
-        br
-        | If you have any questions about your data or wish for it to be removed, then please
-        | send an email to&nbsp;
-        a(
-        href="mailto:e@dwelsh.uk"
-        ) e@dwelsh.uk
 </template>
 
 <script>
@@ -34,12 +28,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   footer {
-    height: 300px;
+    height: 200px;
     position: fixed;
     bottom: 0;
     width: 100%;
+    padding-bottom: 10px;
+
+    .header{
+      padding-top: 0;
+    }
+    .content {
+      padding-bottom: 0;
+      padding-top: 20px;
+    }
   }
   p {
     padding-top: 5%;
