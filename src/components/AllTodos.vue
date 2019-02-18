@@ -39,7 +39,6 @@ export default {
      * Get a slice of todos
      */
     todos() {
-      console.log(this.$store.getters.getTodos.length);
       return this.$store.getters.getTodos
         .slice((this.getPage - 1) * this.limit, ((this.getPage - 1) * this.limit) + this.limit);
     },
@@ -48,7 +47,7 @@ export default {
      * @returns {number}
      */
     maxPage() {
-      return Math.ceil(this.$store.getters.getCount / this.limit);
+      return Math.ceil(this.count / this.limit);
     },
     /**
      * Get current page number
@@ -102,8 +101,8 @@ export default {
       if (!this.hasNextPage()) {
         try {
           const payload = await API.getPagedTodos(
-            this.$store.getters.getPage + 1,
-            this.$store.getters.getLimit,
+            this.getPage + 1,
+            this.limit,
             this.$store.getters.getToken,
           );
 

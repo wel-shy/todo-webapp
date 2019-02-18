@@ -61,7 +61,9 @@ export default {
         await API.updateTodo(newTodo, this.$store.getters.getToken);
       }
 
-      this.$store.commit('updateTodo', newTodo);
+      this.$store.commit('addArchived', newTodo);
+      this.$store.commit('incrementArchiveCount');
+      this.$store.commit('deleteTodo', newTodo._id);
     },
   },
 };

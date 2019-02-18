@@ -33,7 +33,8 @@ export default {
       if (this.$store.getters.getToken.length > 0) {
         await API.deleteTodo(this.todo._id, this.$store.getters.getToken);
       }
-      this.$store.commit('deleteTodo', this.todo._id);
+      this.$store.commit('deleteArchived', this.todo._id);
+      this.$store.commit('decrementArchiveCount');
     },
   },
 };

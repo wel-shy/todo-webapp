@@ -9,10 +9,11 @@
 const state = {
   todos: [],
   archived: [],
-  pageSize: 10,
   page: 1,
+  archivePage: 1,
   limit: 5,
   count: 0,
+  archiveCount: 0,
 };
 
 const mutations = {
@@ -37,8 +38,18 @@ const mutations = {
     });
   },
 
+  appendArchive: (state, payload) => {
+    payload.forEach((t) => {
+      state.archived.push(t);
+    });
+  },
+
   updateCount: (state, payload) => {
     state.count = payload;
+  },
+
+  updateArchiveCount: (state, payload) => {
+    state.archiveCount = payload;
   },
 
   incrementCount: (state) => {
@@ -49,12 +60,28 @@ const mutations = {
     state.count -= 1;
   },
 
+  incrementArchiveCount: (state) => {
+    state.archiveCount += 1;
+  },
+
+  decrementArchiveCount: (state) => {
+    state.archiveCount -= 1;
+  },
+
   incrementPage: (state) => {
     state.page += 1;
   },
 
   decrementPage: (state) => {
     state.page -= 1;
+  },
+
+  incrementArchivePage: (state) => {
+    state.archivePage += 1;
+  },
+
+  decrementArchivePage: (state) => {
+    state.archivePage -= 1;
   },
 
   addTodo: (state, payload) => {
@@ -83,6 +110,8 @@ const getters = {
 
   getPage: state => state.page,
 
+  getArchivePage: state => state.archivePage,
+
   getLimit: state => state.limit,
 
   getTodoById: state => (id) => {
@@ -94,6 +123,8 @@ const getters = {
   getArchived: state => state.archived,
 
   getCount: state => state.count,
+
+  getArchiveCount: state => state.archiveCount,
 };
 
 export default {

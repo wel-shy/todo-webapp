@@ -8,7 +8,7 @@
       )
       AllTodos#all
       Archived#archive(
-        v-if="archived.length > 0",
+        v-if="archived > 0",
       )
     FooterBar
 </template>
@@ -36,7 +36,7 @@ export default {
       return this.$store.getters.getToken;
     },
     archived() {
-      return this.$store.getters.getArchived;
+      return this.$store.getters.getArchiveCount;
     },
   },
   methods: {
@@ -48,10 +48,17 @@ export default {
           this.$store.getters.getToken,
         );
 
-        console.log(payload.count);
-
         this.$store.commit('updateTodos', payload.resources);
         this.$store.commit('updateCount', payload.count);
+
+        const archive = await API.getPagedArchived(
+          this.$store.getters.getArchivePage,
+          this.$store.getters.getLimit,
+          this.$store.getters.getToken,
+        );
+
+        this.$store.commit('updateArchived', archive.resources);
+        this.$store.commit('updateArchiveCount', archive.count);
       } catch (e) {
         console.log(e);
         // TODO: Update UI
