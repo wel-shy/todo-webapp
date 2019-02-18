@@ -5,14 +5,33 @@
       div.box
         div.columns.is-mobile
           div.column.has-text-left.is-narrow
-            a#done-button.button.done-button.is-outlined(
-              @click="toggleDone",
-              :class="{'is-primary': todo.done}"
-            )
-              span.icon.is-small
-                i.far.fa-check-circle
+            div.field.has-addons.control-buttons
+              p.control
+                a#done-button.button.done-button.is-outlined(
+                  @click="toggleDone",
+                  :class="{'is-primary': todo.done}"
+                )
+                  span.icon.is-small
+                    i.far.fa-check-circle
+              p.control
+                a#edit-button.button.done-button.is-outlined(
+                  @click="toggleEdit",
+                )
+                  span.icon.is-small
+                    i.far.fa-edit
           div.column.has-text-left.column
-            p#task-text.task {{ todo.task }}
+            p#task-text.task(
+              v-if="!isBeingEdited"
+            ) {{ todo.task }}
+            div.field.has-addons.has-addons-centered(
+              v-else
+            )
+              div.control.text-input
+                input.input(
+                type="text",
+                v-model="todo.task",
+                v-on:keyup.enter="updateTodo"
+                )
           div.column.has-text-right.column
             div.field.has-addons.control-buttons
               p.control
@@ -35,6 +54,11 @@ import API from '../API';
 export default {
   props: ['todo'],
   name: 'Todo',
+  data() {
+    return {
+      isBeingEdited: false,
+    };
+  },
   methods: {
     async deleteTodo() {
       if (this.$store.getters.getToken.length > 0) {
@@ -42,6 +66,9 @@ export default {
       }
       this.$store.commit('deleteTodo', this.todo._id);
       this.$store.commit('decrementCount');
+    },
+    toggleEdit() {
+      this.isBeingEdited = !this.isBeingEdited;
     },
     async toggleDone() {
       const newTodo = this.todo;
@@ -65,6 +92,20 @@ export default {
       this.$store.commit('incrementArchiveCount');
       this.$store.commit('deleteTodo', newTodo._id);
     },
+    async updateTodo() {
+      if (this.$store.getters.getToken) {
+        try {
+          await API.updateTodo(this.todo, this.$store.getters.getToken);
+          this.$store.commit('updateTodo', this.todo);
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        this.$store.commit('updateTodo', this.todo);
+      }
+
+      this.isBeingEdited = false;
+    },
   },
 };
 </script>
@@ -80,6 +121,10 @@ export default {
 
   .control-buttons {
     float: right;
+  }
+
+  .text-input {
+    width: 100%;
   }
 }
 
