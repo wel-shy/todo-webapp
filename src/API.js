@@ -7,7 +7,7 @@
 import axios from 'axios';
 import mock from '../mock.json';
 
-const URL = 'http://localhost:3333/api';
+const URL = 'https://api.todos.dwelsh.uk/api';
 
 function isTest() {
   return process.env.NODE_ENV === 'test';
