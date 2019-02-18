@@ -1,14 +1,16 @@
 <template lang="pug">
   div#app
-    NewTodo
-    Login(
-      v-if="token.length === 0 ",
-      v-on:authenticated="getData",
-    )
-    AllTodos#all
-    Archived#archive(
-      v-if="archived.length > 0",
-    )
+    div.content
+      NewTodo#new-todo
+      Login(
+        v-if="token.length === 0 ",
+        v-on:authenticated="getData",
+      )
+      AllTodos#all
+      Archived#archive(
+        v-if="archived.length > 0",
+      )
+    FooterBar
 </template>
 
 <script>
@@ -18,10 +20,12 @@ import Cookie from './cookie';
 import API from './API';
 import Login from './components/Login.vue';
 import Archived from './components/Archived.vue';
+import FooterBar from './components/FooterBar.vue';
 
 export default {
   name: 'app',
   components: {
+    FooterBar,
     Archived,
     Login,
     AllTodos,
@@ -61,19 +65,24 @@ export default {
 
 <style lang="scss">
 #app {
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*-moz-osx-font-smoothing: grayscale;*/
-  /*text-align: center;*/
-  /*color: #2c3e50;*/
-  /*margin-top: 60px;*/
-
+  .content {
+    margin-bottom: 350px;
+  }
+  min-height: 100%;
   #all {
     margin-top: 2.5%;
+    /*min-height: 50vh;*/
+  }
+
+  #new-todo {
+    /*min-height: 25vh;*/
+    /*max-height: 25vh;*/
   }
 
   #archive {
     margin-top: 2.5%;
+    margin-bottom: 5%;
+    /*min-height: 25vh;*/
   }
 }
 </style>
