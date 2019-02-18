@@ -80,15 +80,20 @@ export default {
         // TODO: Update UI
       }
     },
-    searchTodos(query) {
+    async searchTodos(query) {
+      this.query = query;
+
       if (!this.$store.getters.getToken) {
         this.searchResults = this.$store.getters.getTodos
           .filter(todo => todo.task.indexOf(query) > -1);
+        return;
       }
 
-      this.query = query;
-
-      return null;
+      try {
+        this.searchResults = await API.search(this.query, this.$store.getters.getToken);
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
   async mounted() {

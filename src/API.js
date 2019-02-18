@@ -116,4 +116,22 @@ export default class API {
     }
     return response.data.payload;
   }
+
+  /**
+   * Search todos by task.
+   * @param query
+   * @param token
+   * @returns {Promise<*>}
+   */
+  static async search(query, token) {
+    let response;
+    if (isTest()) {
+      response = mock.searchTodos;
+    } else {
+      response = await axios.get(`${URL}/todo/search/task/${query}`, { headers: { 'x-access-token': token } });
+    }
+    console.log(response);
+
+    return response.data.payload;
+  }
 }
