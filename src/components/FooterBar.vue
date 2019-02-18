@@ -17,7 +17,7 @@
         ) webapp
         | &nbsp;and&nbsp;
         a(
-        href="https://github.com/wel-shy/todo"
+        href="https://github.com/wel-shy/todos"
         ) API
         | &nbsp;on Github.
 </template>
