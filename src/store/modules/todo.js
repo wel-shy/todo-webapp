@@ -8,6 +8,7 @@
 
 const state = {
   todos: [],
+  archived: [],
   pageSize: 10,
   page: 1,
   limit: 5,
@@ -19,11 +20,21 @@ const mutations = {
     state.todos = payload;
   },
 
+  updateArchived: (state, payload) => {
+    state.archived = payload;
+  },
+
   updateTodo: (state, payload) => {
     const idx = state.todos.findIndex(todo => todo._id === payload._id);
     if (idx >= 0) {
       state.todos[idx] = payload;
     }
+  },
+
+  appendTodos: (state, payload) => {
+    payload.forEach((t) => {
+      state.todos.push(t);
+    });
   },
 
   updateCount: (state, payload) => {
@@ -50,16 +61,25 @@ const mutations = {
     state.todos.unshift(payload);
   },
 
+  addArchived: (state, payload) => {
+    state.archived.unshift(payload);
+  },
+
   deleteTodo: (state, id) => {
     const idx = state.todos.findIndex(todo => todo._id === id);
     state.todos.splice(idx, 1);
+  },
+
+  deleteArchived: (state, id) => {
+    const idx = state.archived.findIndex(todo => todo._id === id);
+    state.archived.splice(idx, 1);
   },
 };
 
 const actions = {};
 
 const getters = {
-  getTodos: state => state.todos.filter(todo => !todo.archived),
+  getTodos: state => state.todos,
 
   getPage: state => state.page,
 
@@ -71,7 +91,7 @@ const getters = {
     return state.todos[idx];
   },
 
-  getArchived: state => state.todos.filter(todo => todo.archived === true),
+  getArchived: state => state.archived,
 
   getCount: state => state.count,
 };

@@ -58,6 +58,30 @@ export default class API {
     return response.data.payload;
   }
 
+  static async getPagedTodos(page, limit, token) {
+    let response;
+
+    if (isTest()) {
+      response = mock.allTodos;
+    } else {
+      response = await axios.get(`${URL}/todo/${page}/${limit}?archived=false`, { headers: { 'x-access-token': token } });
+    }
+
+    return response.data.payload;
+  }
+
+  static async getPagedArchived(page, limit, token) {
+    let response;
+
+    if (isTest()) {
+      response = mock.allTodos;
+    } else {
+      response = await axios.get(`${URL}/todo/${page}/${limit}?archived=true`, { headers: { 'x-access-token': token } });
+    }
+
+    return response.data.payload;
+  }
+
   static async storeTodo(todoData, token) {
     let response;
 

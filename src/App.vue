@@ -42,9 +42,16 @@ export default {
   methods: {
     async getData() {
       try {
-        const todos = await API.getAllTodos(this.$store.getters.getToken);
-        this.$store.commit('updateTodos', todos);
-        this.$store.commit('updateCount', todos.length);
+        const payload = await API.getPagedTodos(
+          this.$store.getters.getPage,
+          this.$store.getters.getLimit,
+          this.$store.getters.getToken,
+        );
+
+        console.log(payload.count);
+
+        this.$store.commit('updateTodos', payload.resources);
+        this.$store.commit('updateCount', payload.count);
       } catch (e) {
         console.log(e);
         // TODO: Update UI

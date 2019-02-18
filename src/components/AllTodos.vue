@@ -29,6 +29,7 @@
 
 <script>
 import Todo from './Todo.vue';
+import API from '../API';
 
 export default {
   name: 'AllTodos',
@@ -38,6 +39,7 @@ export default {
      * Get a slice of todos
      */
     todos() {
+      console.log(this.$store.getters.getTodos.length);
       return this.$store.getters.getTodos
         .slice((this.getPage - 1) * this.limit, ((this.getPage - 1) * this.limit) + this.limit);
     },
@@ -46,7 +48,7 @@ export default {
      * @returns {number}
      */
     maxPage() {
-      return Math.ceil(this.$store.getters.getTodos.length / this.limit);
+      return Math.ceil(this.$store.getters.getCount / this.limit);
     },
     /**
      * Get current page number
@@ -91,10 +93,52 @@ export default {
      */
     updatePage(direction) {
       if (direction > 0) {
-        this.$store.commit('incrementPage');
+        this.fetchNextPage();
       } else {
         this.$store.commit('decrementPage');
       }
+    },
+    async fetchNextPage() {
+      if (!this.hasNextPage()) {
+        try {
+          const payload = await API.getPagedTodos(
+            this.$store.getters.getPage + 1,
+            this.$store.getters.getLimit,
+            this.$store.getters.getToken,
+          );
+
+          console.log(payload);
+
+          this.$store.commit('appendTodos', payload.resources);
+          this.$store.commit('updateCount', payload.count);
+          this.$store.commit('incrementPage');
+        } catch (e) {
+          console.log(e);
+          // TODO: Update UI
+        }
+      } else {
+        this.$store.commit('incrementPage');
+      }
+    },
+    hasNextPage() {
+      // get the stored todos for the next page.
+      const nextTodos = this.$store.getters.getTodos
+        .slice((this.getPage) * this.limit, ((this.getPage) * this.limit) + this.limit);
+
+      // If there are no stored todos, then fetch
+      if (nextTodos.length === 0) return false;
+
+      // Is the next page the last page?
+      const isLastPage = this.maxPage === this.getPage + 1;
+
+      // If last page...
+      if (isLastPage) {
+        // Are all the todos stored?
+        // If so then return true, else fetch the last.
+        return this.$store.getters.getTodos.length === this.count;
+      }
+      // if not last page, return true if has enough to fill the page, else return false.
+      return nextTodos.length === this.limit;
     },
   },
 };
